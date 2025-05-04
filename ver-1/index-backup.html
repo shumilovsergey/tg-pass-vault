@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glass Password Manager</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: url('background.png') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 20px 80px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #fff;
+      font-size: 2rem;
+      text-align: center;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .password-list {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .glass-card:hover {
+      transform: scale(1.02);
+    }
+
+    .password-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #222;
+    }
+
+    .password-details {
+      margin-top: 15px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 1rem;
+    }
+
+    .password-details span {
+      color: #444;
+    }
+
+    .glass-card.active .password-details {
+      display: flex;
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .small-btn {
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.3);
+      backdrop-filter: blur(5px);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .small-btn:hover {
+      background: rgba(255,255,255,0.5);
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(15px);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 60px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .bottom-nav button {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .hidden-password {
+      font-family: 'Courier New', Courier, monospace;
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <h1>My Passwords</h1>
+
+  <div class="password-list">
+    <div class="glass-card">
+      <div class="password-title">Google Account</div>
+      <div class="password-details">
+        <span><strong>Name:</strong> Office Google</span>
+        <span><strong>Password:</strong> <span class="password hidden-password">•••••••••••</span></span>
+        <span><strong>URL:</strong> https://google.com</span>
+        <div class="button-group">
+          <button class="small-btn copy-password">Copy Password</button>
+          <button class="small-btn reveal-password">Reveal</button>
+          <button class="small-btn copy-url">Copy URL</button>
+          <button class="small-btn close-card">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass-card">
+      <div class="password-title">Internal CRM</div>
+      <div class="password-details">
+        <span><strong>Name:</strong> CRM System</span>
+        <span><strong>Password:</strong> <span class="password hidden-password">•••••••••••</span></span>
+        <span><strong>URL:</strong> https://crm.office.com</span>
+        <div class="button-group">
+          <button class="small-btn copy-password">Copy Password</button>
+          <button class="small-btn reveal-password">Reveal</button>
+          <button class="small-btn copy-url">Copy URL</button>
+          <button class="small-btn close-card">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass-card">
+      <div class="password-title">Server Login</div>
+      <div class="password-details">
+        <span><strong>Name:</strong> Office Server</span>
+        <span><strong>Password:</strong> <span class="password hidden-password">•••••••••••</span></span>
+        <span><strong>URL:</strong> https://server.office.com</span>
+        <div class="button-group">
+          <button class="small-btn copy-password">Copy Password</button>
+          <button class="small-btn reveal-password">Reveal</button>
+          <button class="small-btn copy-url">Copy URL</button>
+          <button class="small-btn close-card">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <button>Add</button>
+    <button>Edit</button>
+    <button>Delete</button>
+  </div>
+
+  <script>
+    const items = document.querySelectorAll('.glass-card');
+    const revealButtons = document.querySelectorAll('.reveal-password');
+    const copyPasswordButtons = document.querySelectorAll('.copy-password');
+    const copyUrlButtons = document.querySelectorAll('.copy-url');
+    const closeButtons = document.querySelectorAll('.close-card');
+
+    items.forEach(item => {
+      item.addEventListener('click', (e) => {
+        if (!e.target.classList.contains('small-btn')) {
+          items.forEach(i => {
+            if (i !== item) i.classList.remove('active');
+          });
+          if (!item.classList.contains('active')) {
+            item.classList.add('active');
+          }
+        }
+      });
+    });
+
+    revealButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const passwordSpan = button.parentElement.parentElement.querySelector('.password');
+        if (passwordSpan.textContent.includes('•')) {
+          passwordSpan.textContent = passwordSpan.dataset.realPassword;
+        } else {
+          passwordSpan.textContent = '•••••••••••';
+        }
+      });
+    });
+
+    copyPasswordButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const password = button.parentElement.parentElement.querySelector('.password').dataset.realPassword || button.parentElement.parentElement.querySelector('.password').textContent;
+        navigator.clipboard.writeText(password);
+        alert('Password copied!');
+      });
+    });
+
+    copyUrlButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const url = button.parentElement.parentElement.querySelector('span:nth-child(3)').textContent.replace('URL: ', '');
+        navigator.clipboard.writeText(url);
+        alert('URL copied!');
+      });
+    });
+
+    closeButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        const item = button.closest('.glass-card');
+        item.classList.remove('active');
+        e.stopPropagation();
+      });
+    });
+
+    // Set real passwords for reveal
+    document.querySelectorAll('.password').forEach((el, idx) => {
+      const passwords = ['mySecurePass123!', 'CrmOffice987@', 'S3rver$Pass!'];
+      el.dataset.realPassword = passwords[idx];
+    });
+  </script>
+</body>
+</html>

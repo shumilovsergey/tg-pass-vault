@@ -1,0 +1,24 @@
+[
+    {
+      "id": 1,
+      "title": "Google Account",
+      "url": "https://google.com",
+      "username": "Office Google",
+      "password": "mySecurePass123!"
+    },
+    {
+      "id": 2,
+      "title": "Internal CRM",
+      "url": "https://crm.office.com",
+      "username": "CRM System",
+      "password": "CrmOffice987@"
+    },
+    {
+      "id": 3,
+      "title": "Server Login",
+      "url": "https://server.office.com",
+      "username": "Office Server",
+      "password": "S3rver$Pass!"
+    }
+  ]
+  

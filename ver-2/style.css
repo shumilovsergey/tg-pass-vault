@@ -1,0 +1,137 @@
+body {
+    background: url('background.png') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 80px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 2rem;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  }
+  
+  .password-list {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .glass-card {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .glass-card:hover {
+    transform: scale(1.02);
+  }
+  
+  .password-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #222;
+  }
+  
+  .password-details {
+    margin-top: 15px;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1rem;
+  }
+  
+  .password-details span {
+    color: #444;
+  }
+  
+  .glass-card.active .password-details {
+    display: flex;
+  }
+  
+  .button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .small-btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.3);
+    backdrop-filter: blur(5px);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .small-btn:hover {
+    background: rgba(255,255,255,0.5);
+  }
+  
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
+  
+  .bottom-nav button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #333;
+  }
+  
+  .hidden-password {
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 2px;
+  }
+
+  .icon-btn {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    padding: 5px 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .icon-btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  
+  .password-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  
